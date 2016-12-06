@@ -64,15 +64,17 @@
     self.toolBar = toolBar;
     [self layoutViews];
     [self.view addSubview:toolBar];
+    sg_ws();
     __weak typeof(toolBar) weakToolBar = self.toolBar;
     [toolBar.mainToolBar setButtonActionHandlerBlock:^(UIBarButtonItem *item) {
         switch (item.tag) {
             case SGBrowserToolButtonEdit:
                 weakToolBar.isEditing = YES;
+                [weakSelf.selectModels removeAllObjects];
+                weakToolBar.isEditing = YES;
                 break;
         }
     }];
-    sg_ws();
     [toolBar.secondToolBar setButtonActionHandlerBlock:^(UIBarButtonItem *item) {
         switch (item.tag) {
             case SGBrowserToolButtonBack: {
